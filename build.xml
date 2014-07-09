@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="wallmart" default="runTestSuite" basedir=".">
+
+	<taskdef resource="testngtasks" classpath="lib/testng-6.8.jar" />
+
+	<property name="test.build.dir" value="build" />
+	<property name="test.src.dir" value="src" />
+	<property name="test.conf.dir" value="conf" />
+	<property name="test.lib.dir" value="lib" />
+	<property name="akshu.root" value="${basedir}"/>
+	<property name="test.testSuite.dir" value="testSuite" />
+	<property name="testng.report.dir" value="report" />
+	<property name="test.resource.dir" value="resources" />
+	<property name="testng.failed.report.dir" value="report-failed" />
+	<property name="tmp.dir" value="temp" />
+	<property name="results.dir" value="result_new" />
+
+	<path id="build.classpath">
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	<path id="local.build.classpath">
+		<fileset dir="${test.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="run.classpath">
+		<path location="${test.build.dir}"/>
+		<path location="${test.conf.dir}" />
+		<path location="${test.resource.dir}" />
+		<path refid="build.classpath" />
+		<fileset dir="${test.lib.dir}">
+			<include name="jtds-1.2.2.jar" />
+			<include name="jettison-1.0-RC1.jar" />
+		</fileset>
+	</path>
+
+	<target name="compile">
+		<mkdir dir="${test.build.dir}" />
+		<copy todir="${test.build.dir}">
+			<fileset dir="${test.conf.dir}" includes="**/*.*" />
+		</copy>
+		<javac debug="true" srcdir="${test.src.dir}" destdir="${test.build.dir}"  classpathref="build.classpath" />
+	</target>
+
+
+	<target name="runTestSuite" description="Execute the specified TestSuite" depends="clean,compile">
+
+		<!-- Override SeleniumGridHost and GRID-port if specified -->
+		<copy file="${basedir}/testSuite/${testSuiteXmlName}"  tofile="${basedir}/testSuite/modified-suite.xml" overwrite="true" />
+		<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpathref="local.build.classpath" />
+		<xmltask source="${basedir}/testSuite/modified-suite.xml" dest="${basedir}/testSuite/modified-suite.xml" report="false" >
+        	<attr if="webdriverHost" path="suite/parameter[@name='webdriverHost']" attr="value" value="${webdriverHost}" />
+			<attr if="webdriverPort" path="suite/parameter[@name='webdriverPort']" attr="value" value="${webdriverPort}" />
+            <attr if="platform" path="suite/test/parameter[@name='platform']" attr="value" value="${platform}" />
+            <attr if="browser" path="suite/test/parameter[@name='browser']" attr="value" value="${browser}" />
+            <attr if="webSite" path="suite/parameter[@name='webSite']" attr="value" value="${webSite}" />
+			<attr if="version" path="suite/parameter[@name='version']" attr="value" value="${version}" />
+        </xmltask>
+
+	<testng classpathref="run.classpath" outputdir="${testng.report.dir}"  workingDir="${test.build.dir}" enableassert="" configfailurepolicy="continue" listeners="org.uncommons.reportng.HTMLReporter,org.uncommons.reportng.JUnitXMLReporter">
+			<xmlfileset dir="${test.testSuite.dir}" includes="modified-suite.xml" />
+			<jvmarg value="-Xmx512m"/>
+			<sysproperty key="local.props.file" value="${local.props.file}"/>
+			<sysproperty key="org.uncommons.reportng.title" value="My Test Report"/>
+			<sysproperty key="org.uncommons.reportng.coverage-report" value="relative"/>
+	</testng>
+	
+	
+	</target>
+
+	<target name="clean">
+		<delete file="result.txt" />
+		<delete dir="${test.build.dir}" />
+		<delete dir="${testng.report.dir}" />
+		<delete dir="${testng.failed.report.dir}" />
+	</target>
+
+</project>
