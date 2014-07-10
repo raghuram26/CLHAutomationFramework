@@ -3,13 +3,16 @@ package com.clh.tests;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import com.castlight.webdriver.TestConfiguration;
-import com.castlight.webdriver.WebdriverTestCases;
+import com.clh.webdriver.TestConfiguration;
+import com.clh.webdriver.WebdriverTestCases;
+import com.clh.pageobjects.*;
 
 public class SampleTests extends WebdriverTestCases{
 
+   LoginPage lp = null;
 	public SampleTests() {
 		// TODO Auto-generated constructor stub
+	   lp = new LoginPage();
 	}
 
 	@Test

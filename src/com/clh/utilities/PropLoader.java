@@ -5,6 +5,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * @version 9/07/2014
+ * @author <a href="mailto:vpandugayala@castlighthealth.com">Raghuram</a>
+ *
+ */
+
 public class PropLoader {
 	
 	private static final String TEST_PROPERTIES = "/node.props";

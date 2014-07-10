@@ -1,0 +1,13 @@
+<suite name="Grid Sanity TestSuite" thread-count="13">
+	<parameter name="webdriverHost" value="127.0.0.1" />
+	<parameter name="webdriverPort" value="4404" />
+	<parameter name="webSite" value="http://www.google.com" />
+	<parameter name="isHttps" value="true" />
+	<test verbose="2" name="Firefox" annotations="JDK">
+	    <parameter name="browser" value="firefox" />
+		<parameter name="platform" value="MAC" />
+		<classes>
+			<class name="com.castlight.tests.SampleTests" />
+		</classes>
+	</test>
+</suite>

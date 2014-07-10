@@ -2,13 +2,14 @@ package com.clh.webdriver;
 
 import java.util.Properties;
 
-import com.castlight.helpers.PropLoader;
+import com.clh.utilities.PropLoader;
 
 /**
- * 
+ * @version 9/07/2014
  * @author <a href="mailto:vpandugayala@castlighthealth.com">Raghuram</a>
  *
  */
+
 public class TestConfiguration {
 
 	private static Properties props;
