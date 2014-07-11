@@ -7,5 +7,8 @@ package com.clh.pageobjects;
  */
 
 public class LoginPage {
+	
+	public LoginPage() {
+	}
    
 }
