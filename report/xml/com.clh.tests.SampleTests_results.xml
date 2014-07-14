@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Chrome"
+           tests="1"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="23.509">
+  <properties />
+  
+  
+            <testcase name="testPrePod on null(com.clh.tests.SampleTests)" time="23.509" classname="com.clh.tests.SampleTests" />
+      
+</testsuite>

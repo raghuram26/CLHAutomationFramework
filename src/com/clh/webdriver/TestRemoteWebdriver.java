@@ -29,7 +29,7 @@ import org.testng.Reporter;
  */
 
 public class TestRemoteWebdriver extends RemoteWebDriver {
-	
+ 
 	public TestRemoteWebdriver() {
 		// TODO Auto-generated constructor stub
 	}
@@ -80,7 +80,7 @@ public class TestRemoteWebdriver extends RemoteWebDriver {
 		if(statusThreadLocal.get() != null && webdriverThreadLocal.get()!= null){
 			String browserName=statusThreadLocal.get().getBrowser();
 			String imageName = "screenshot_"+browserName+"_"+timeStamp + ".png";
-			String imagePath = new File("").getAbsolutePath()+File.separator+"../"+"report"+File.separator+imageName;
+			String imagePath = new File("").getAbsolutePath()+File.separator+"../"+"report/html"+File.separator+imageName;
 			WebDriver augmentedDriver = new Augmenter().augment((webdriverThreadLocal.get()));
 			if(augmentedDriver != null){
 				File scrFile = ((TakesScreenshot)augmentedDriver).getScreenshotAs(OutputType.FILE);
@@ -92,8 +92,8 @@ public class TestRemoteWebdriver extends RemoteWebDriver {
 				}
 		        System.out.println("Captured screenshot");
 		        Reporter.log("<a href=\""+imageName+"\">screenshot_"+browserName+"</a>");
-		        String str = "home/raghuram/workspace/akshu/report/";
-		        Reporter.log("<img src=\"file:///" + str + imageName + "\" alt=\"\"/><br />");
+		        // String str = "home/raghuram/workspace/akshu/report/";
+		        // Reporter.log("<img src=\"file:///" + str + imageName + "\" alt=\"\"/><br />");
 			}
 		}
 	}
