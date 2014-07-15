@@ -41,4 +41,8 @@ public class TestConfiguration {
 	public String getUrl(){
 		return props.getProperty("url");
 	}
+	
+	public String getTestAccountPasswords(){
+	   return props.getProperty("test.passwords");
+	}
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -57,6 +58,7 @@ public class TestRemoteWebdriver extends RemoteWebDriver {
 	 */
 	public void open(String arg0) {
 		webdriverThreadLocal.get().get(arg0);
+		webdriverThreadLocal.get().manage().window().maximize();
 	}
 	
 	public void click(By by){
@@ -174,6 +176,10 @@ public class TestRemoteWebdriver extends RemoteWebDriver {
 	public WebElement findElement(By by){
 		//waitForElementToLoad(by);
 		return webdriverThreadLocal.get().findElement(by);
+	}
+	
+	public List<WebElement> findListOfElement(By by){
+	   return webdriverThreadLocal.get().findElements(by);
 	}
 	
 	public void selectFromDropDown(By by,String value){

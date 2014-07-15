@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<suite name="CLH TestSuite" parallel="tests" thread-count="13">
+<suite name="CLH TestSuite" thread-count="13">
 	<parameter name="webdriverHost" value="127.0.0.1"/>
 	<parameter name="webdriverPort" value="4444"/>
 	<parameter name="webSite" value="http://www.google.com"/>
 	<parameter name="isHttps" value="true"/>
 	<test annotations="JDK" name="Firefox" parallel="instances" verbose="2">
 	    <parameter name="browser" value="firefox"/>
-		<parameter name="platform" value="MAC"/>
-		<classes>
-			<class name="com.clh.tests.SampleTests"/>
-		</classes>
-	</test>
-	<test annotations="JDK" name="chrome" parallel="instances" verbose="2">
-	    <parameter name="browser" value="chrome"/>
 		<parameter name="platform" value="MAC"/>
 		<classes>
 			<class name="com.clh.tests.SampleTests"/>
