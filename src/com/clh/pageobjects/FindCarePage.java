@@ -19,16 +19,17 @@ public class FindCarePage extends BasePage {
    public void findAllLinks() {
       List<WebElement> links = driver.findListOfElement(By.tagName("a"));
       Reporter.log("Links");
-      String [] procedures = new String [] { "Primary+care+for+adults","Primary+care+for+children","Pediatric+surgeon+visit"};
-      System.out.println("Size :: " + links.size());
+      //String [] procedures = new String [] { "Primary+care+for+adults","Primary+care+for+children","Pediatric+surgeon+visit"};
+      //System.out.println("Size :: " + links.size());
       for(int i=0;i< links.size(); i++){
          String url = links.get(i).getAttribute("href");
-         for(int j=0;j<procedures.length;j++){
+         Reporter.log(url);
+        /* for(int j=0;j<procedures.length;j++){
             if(url.contains(procedures[j])){
                Reporter.log(url);
                
             }
-         }
+         }*/
          
       }
       
