@@ -42,4 +42,5 @@ public class LoginPage extends WebdriverTestCases {
 	   driver.click(LOGIN_BUTTON);
 	   Reporter.log("Clicked on Login button\n");
 	}
+	
 }
