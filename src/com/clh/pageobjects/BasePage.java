@@ -1,6 +1,9 @@
 package com.clh.pageobjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
 import com.clh.webdriver.WebdriverTestCases;
@@ -21,7 +24,7 @@ public class BasePage extends WebdriverTestCases {
    private By SECURITY = By.linkText("Security");
    private By PRIVACY = By.linkText("Privacy");
    private By TERMS_OF_USE = By.linkText("Terms of use");
-   private By FEEDBACK = By.linkText(" Feedback ");
+   private By FEEDBACK = By.linkText("Feedback");
    private By HOME = By.xpath(".//*[@id='tabs_holder']/li[1]/a");
    private By FIND_CARE = By.xpath(".//*[@id='tabs_holder']/li[2]/a");
    private By PAST_CARE = By.xpath(".//*[@id='tabs_holder']/li[3]/a");
@@ -33,6 +36,9 @@ public class BasePage extends WebdriverTestCases {
    private By INBOX_PAGE = By.id("inbox");
    private By BOOKMARKS_PAGE = By.xpath(".//*[@id='content_container']/div/h1");
 
+   private WebDriverWait wait;
+   private int waitTimeOutLimit = 300;
+   
    public BasePage() {
 
    }
@@ -122,6 +128,7 @@ public class BasePage extends WebdriverTestCases {
 
    public void clickOnName() {
       driver.click(FULL_NAME);
+      driver.isElementClickable(LOG_OUT);
       Reporter.log("Clicked on Name");
    }
 

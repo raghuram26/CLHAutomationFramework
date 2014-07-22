@@ -18,6 +18,7 @@ public class CheckHomePageLinksTests extends WebdriverTestCases {
    
    public CheckHomePageLinksTests(){
       //TODO
+	   
    }
    
    @Test
@@ -27,21 +28,21 @@ public class CheckHomePageLinksTests extends WebdriverTestCases {
       loginPage.setPassword(TestConfiguration.getInstance().getTestAccountPasswords());
       loginPage.clickLoginButton();
       homePage.isLoginSuccessful();
-      //homePage.clickOnAccount();
-      //homePage.clickOnInbox();
+      homePage.clickOnAccount();
+      homePage.clickOnInbox();
       homePage.clickOnBookmarks();
       homePage.clickNeedHelp();
       homePage.closeNeedHelp();
       homePage.clickOnFindCare();
       homePage.clickOnPastCare();
       homePage.clickOnYourPlan();
-     /* homePage.clickOnFeedback();
+      homePage.clickOnFeedback();
       homePage.closeFeedBackForm();
       homePage.clickOnSecurity();
       homePage.clickOnOverview();
       homePage.clickOnPrivacy();
-      homePage.clickOnTermsOfUse();*/
-      //homePage.logout();
+      homePage.clickOnTermsOfUse();
+      homePage.logout();
    }
    
   /*@Factory(dataProvider = "userProfiles")
@@ -49,7 +50,7 @@ public class CheckHomePageLinksTests extends WebdriverTestCases {
       this.emailId = emailId;
    }*/
 
-   @DataProvider(parallel = true)
+   /*@DataProvider(parallel = true)
    public Object[][] userProfiles() throws Exception {
       int rowCount = ReadExcel.getRowCount(url, "Sheet1");
       int colCount = ReadExcel.getColumnCount(url, "Sheet1");
@@ -62,5 +63,5 @@ public class CheckHomePageLinksTests extends WebdriverTestCases {
          }
       }
       return testObjArray;
-   }
+   }*/
 }
