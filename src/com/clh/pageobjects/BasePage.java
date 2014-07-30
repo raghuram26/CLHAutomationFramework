@@ -17,14 +17,17 @@ public class BasePage extends WebdriverTestCases {
    private By INBOX = By.linkText("Inbox");
    private By YOUR_ACCOUNT = By.xpath(".//*[@id='user_menu']/div[2]/ul/li[2]");
    // By.linkText("Your Account");
-   private By LOG_OUT = By.linkText("Log Out");
+   //private By LOG_OUT = By.linkText("Log Out");
+   private By LOG_OUT = By.xpath(".//*[@id='logout_link']");
    private By VERSION_INFO = By.id("version_info");
    private By FOOTER_COPYRIGHT = By.id("footer_copyright");
-   private By OVERVIEW = By.linkText("Overview");
-   private By SECURITY = By.linkText("Security");
-   private By PRIVACY = By.linkText("Privacy");
-   private By TERMS_OF_USE = By.linkText("Terms of use");
-   private By FEEDBACK = By.linkText("Feedback");
+   
+   private By OVERVIEW = By.xpath(".//a[text()='Overview']");
+   private By SECURITY = By.xpath(".//a[text()='Security']");
+   private By PRIVACY = By.xpath(".//a[text()='Privacy']");
+   private By TERMS_OF_USE = By.xpath(".//a[text()='Terms of use']");
+   private By FEEDBACK = By.xpath(".//a[text()=' Feedback ']");
+   
    private By HOME = By.xpath(".//*[@id='tabs_holder']/li[1]/a");
    private By FIND_CARE = By.xpath(".//*[@id='tabs_holder']/li[2]/a");
    private By PAST_CARE = By.xpath(".//*[@id='tabs_holder']/li[3]/a");
@@ -36,9 +39,6 @@ public class BasePage extends WebdriverTestCases {
    private By INBOX_PAGE = By.id("inbox");
    private By BOOKMARKS_PAGE = By.xpath(".//*[@id='content_container']/div/h1");
 
-   private WebDriverWait wait;
-   private int waitTimeOutLimit = 300;
-   
    public BasePage() {
 
    }
@@ -49,6 +49,7 @@ public class BasePage extends WebdriverTestCases {
 
    public void logout() {
       clickOnName();
+      driver.isElementClickable(LOG_OUT);
       driver.click(LOG_OUT);
       Reporter.log("Clicked on Log out");
    }
@@ -116,7 +117,6 @@ public class BasePage extends WebdriverTestCases {
          Reporter.log("Inbox Opened");
       } else {
          Reporter.log("Inbox not opened");
-         driver.screenShot();
       }
    }
 
@@ -128,7 +128,6 @@ public class BasePage extends WebdriverTestCases {
 
    public void clickOnName() {
       driver.click(FULL_NAME);
-      driver.isElementClickable(LOG_OUT);
       Reporter.log("Clicked on Name");
    }
 
@@ -136,7 +135,6 @@ public class BasePage extends WebdriverTestCases {
       if (driver.isElementPresent(FULL_NAME)) {
          Reporter.log("Logged in Successfully");
       } else {
-         driver.screenShot();
          Reporter.log("Not Logged in");
       }
    }

@@ -12,6 +12,12 @@ import org.testng.Reporter;
 
 public class FindCarePage extends BasePage {
 
+   //Common type of care
+   private By PRIMARY_CARE_FOR_ADULTS = By.xpath(".//a[text()='Primary care for adults']");
+   private By PRIMARY_CARE_FOR_CHILDREN = By.xpath(".//a[text()='Primary care for children']");
+   private By COLONOSCOPY = By.xpath(".//a[text()='Colonoscopy']");
+   private By GASTROENTEROLOGIST_VISIT  = By.xpath(".//a[text()='Gastroenterologist visit']");
+
    public FindCarePage() {
 
    }
