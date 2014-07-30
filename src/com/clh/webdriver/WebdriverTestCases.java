@@ -1,6 +1,7 @@
 package com.clh.webdriver;
 
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase;
 
@@ -51,10 +52,9 @@ public class WebdriverTestCases extends TestCase {
       capability = setBrowser(browser);
       setBrowserCapabilites(capability, platform1, version);
 
-      // rdriver = new RemoteWebDriver(new URL("http://"+ webdriverHost + ":" +
-      // webdriverPort + "/wd/hub"),capability);
-      rdriver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"),
-            capability);
+      rdriver = new RemoteWebDriver(new URL("http://"+ webdriverHost + ":" +webdriverPort + "/wd/hub"),capability);
+      /*rdriver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"),
+            capability);*/
       driver.setFileDetector(new LocalFileDetector());
       instance = new WebdriverConfigurationBean(webdriverHost, webdriverPort,
             browser, webSite, isHttps);
@@ -63,6 +63,7 @@ public class WebdriverTestCases extends TestCase {
 
       driver.setRemoteWebDriver(rdriver);
       driver.setStatusHolderInstance(instance);
+      //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
    }
 
    /*
@@ -104,6 +105,7 @@ public class WebdriverTestCases extends TestCase {
       } else if (browser.equalsIgnoreCase("ipad")) {
          return DesiredCapabilities.ipad();
       } else if (browser.equalsIgnoreCase("iphone")) {
+         System.out.println("[Debug]iphone");
          return DesiredCapabilities.iphone();
       } else if (browser.equalsIgnoreCase("safari")) {
          return DesiredCapabilities.safari();

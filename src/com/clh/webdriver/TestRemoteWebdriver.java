@@ -73,6 +73,25 @@ public class TestRemoteWebdriver extends RemoteWebDriver {
 		(new WebDriverWait(webdriverThreadLocal.get(), 60, 1000)).until(ExpectedConditions.elementToBeClickable(by));
 	}
 	
+	public Boolean isElementPresent(By by){
+	   if((new WebDriverWait(webdriverThreadLocal.get(),60,1000)).until(ExpectedConditions.presenceOfElementLocated(by)) != null){
+	      return true;
+	   }else{
+	      return false;
+	   }
+	}
+	
+	public Boolean isElementVisible(By by){
+      if((new WebDriverWait(webdriverThreadLocal.get(),60,1000)).until(ExpectedConditions.visibilityOfElementLocated(by)) != null){
+         return true;
+      }else{
+         return false;
+      }
+   }
+	
+	public String getText(By by){
+	   return webdriverThreadLocal.get().findElement(by).getText();
+	}
 	/**
 	 * Screenshot
 	 */
@@ -165,13 +184,13 @@ public class TestRemoteWebdriver extends RemoteWebDriver {
 		webdriverThreadLocal.get().findElement(by).sendKeys(str);
 	}
 	
-	public Boolean isElementPresent(By by){
+	/*public Boolean isElementPresent(By by){
 		if(findElement(by) != null){
 			return true;
 		}else{
 			return false;
 		}
-	}
+	}*/
 	
 	public WebElement findElement(By by){
 		//waitForElementToLoad(by);

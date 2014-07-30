@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import com.clh.pageobjects.HomePage;
 import com.clh.pageobjects.LoginPage;
+import com.clh.pageobjects.YourPlanPage;
 import com.clh.utilities.ReadExcel;
 import com.clh.webdriver.TestConfiguration;
 import com.clh.webdriver.WebdriverTestCases;
@@ -13,44 +14,57 @@ import com.clh.webdriver.WebdriverTestCases;
 public class CheckHomePageLinksTests extends WebdriverTestCases {
    LoginPage loginPage = new LoginPage();
    HomePage homePage = new HomePage();
+   YourPlanPage ypp = new YourPlanPage();
    private String emailId;
    String url = "/Users/raghuramp/Projects/Ventana/CLHAutomationFramework/data/user_profiles.xls";
    
    public CheckHomePageLinksTests(){
       //TODO
-	   
    }
    
    @Test
    public void testHeaderLinks(){
       loginPage.openURL();
-      loginPage.setEmailID("msft1_hap1@castlighthealth.com");
+      //loginPage.setEmailID("calpers_basic_ca_1@castlighthealth.com");
+      //loginPage.setEmailID("msft1_hap1@castlighthealth.com");
+      loginPage.setEmailID(emailId);
       loginPage.setPassword(TestConfiguration.getInstance().getTestAccountPasswords());
       loginPage.clickLoginButton();
       homePage.isLoginSuccessful();
-      homePage.clickOnAccount();
+    /*  homePage.clickOnAccount();
       homePage.clickOnInbox();
       homePage.clickOnBookmarks();
       homePage.clickNeedHelp();
       homePage.closeNeedHelp();
       homePage.clickOnFindCare();
-      homePage.clickOnPastCare();
+      homePage.clickOnPastCare();*/
       homePage.clickOnYourPlan();
-      homePage.clickOnFeedback();
+     // ypp.clickOnOutOfNetwork();
+      ypp.clickOnPreventiveServices();
+      ypp.getDeductibleText();
+      ypp.clickOnCoinsurance();
+      ypp.getCoinsuranceText();
+      ypp.clickOnCovered();
+      ypp.getCoveredText();
+      /*ypp.clickOnCommonMedicalServices();
+      ypp.clickOnEmergencyAndUrgentCare();
+      ypp.clickOnHospitalServices();
+      ypp.verifyBenefitsDetials();*/
+      /*homePage.clickOnFeedback();
       homePage.closeFeedBackForm();
       homePage.clickOnSecurity();
       homePage.clickOnOverview();
       homePage.clickOnPrivacy();
-      homePage.clickOnTermsOfUse();
+      homePage.clickOnTermsOfUse();*/
       homePage.logout();
    }
    
-  /*@Factory(dataProvider = "userProfiles")
+  @Factory(dataProvider = "userProfiles")
    public CheckHomePageLinksTests(String emailId) {
       this.emailId = emailId;
-   }*/
+   }
 
-   /*@DataProvider(parallel = true)
+   @DataProvider(parallel = true)
    public Object[][] userProfiles() throws Exception {
       int rowCount = ReadExcel.getRowCount(url, "Sheet1");
       int colCount = ReadExcel.getColumnCount(url, "Sheet1");
@@ -63,5 +77,5 @@ public class CheckHomePageLinksTests extends WebdriverTestCases {
          }
       }
       return testObjArray;
-   }*/
+   }
 }
