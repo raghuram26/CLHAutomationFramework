@@ -12,50 +12,76 @@ import org.testng.Reporter;
 
 public class FindCarePage extends BasePage {
 
-   //Common type of care
-   private By PRIMARY_CARE_FOR_ADULTS = By.xpath(".//a[text()='Primary care for adults']");
-   private By PRIMARY_CARE_FOR_CHILDREN = By.xpath(".//a[text()='Primary care for children']");
+   // Common type of care
+   private By PRIMARY_CARE_FOR_ADULTS = By
+         .xpath(".//a[text()='Primary care for adults']");
+   private By PRIMARY_CARE_FOR_CHILDREN = By
+         .xpath(".//a[text()='Primary care for children']");
    private By COLONOSCOPY = By.xpath(".//a[text()='Colonoscopy']");
-   private By GASTROENTEROLOGIST_VISIT  = By.xpath(".//a[text()='Gastroenterologist visit']");
+   private By GASTROENTEROLOGIST_VISIT = By
+         .xpath(".//a[text()='Gastroenterologist visit']");
+   private By HIP_REPLACEMENT_SURGERY = By
+         .xpath(".//a[text()='Hip replacement surgery']");
+   private By URINARY_TRACT_INFECTION = By
+         .xpath(".//a[text()='Urinary tract infection']");
+   private By PREGNANCY = By.xpath(".//a[text()='Pregnancy']");
+   private By PINK_EYE = By.xpath(".//a[text()='Pink eye']");
 
    public FindCarePage() {
 
    }
 
+   public void clickOnProcedure(String procedureName) {
+      switch (procedureName) {
+      case "pregnancy":
+         driver.click(PREGNANCY);
+         break;
+      case "pinkeye":
+         driver.click(PINK_EYE);
+         break;
+      case "primarycareforadults":
+         driver.click(PRIMARY_CARE_FOR_ADULTS);
+         break;
+      case "hipreplacementsurgery":
+         driver.click(HIP_REPLACEMENT_SURGERY);
+         break;
+      case "urinarytractinfection":
+         driver.click(URINARY_TRACT_INFECTION);
+         break;
+      default:
+         Reporter.log("Procedure is not listed");
+         break;
+      }
+   }
+
    public void findAllLinks() {
       List<WebElement> links = driver.findListOfElement(By.tagName("a"));
       Reporter.log("Links");
-      //String [] procedures = new String [] { "Primary+care+for+adults","Primary+care+for+children","Pediatric+surgeon+visit"};
-      //System.out.println("Size :: " + links.size());
-      for(int i=0;i< links.size(); i++){
+      // String [] procedures = new String [] {
+      // "Primary+care+for+adults","Primary+care+for+children","Pediatric+surgeon+visit"};
+      // System.out.println("Size :: " + links.size());
+      for (int i = 0; i < links.size(); i++) {
          String url = links.get(i).getAttribute("href");
          Reporter.log(url);
-        /* for(int j=0;j<procedures.length;j++){
-            if(url.contains(procedures[j])){
-               Reporter.log(url);
-               
-            }
-         }*/
-         
+         /*
+          * for(int j=0;j<procedures.length;j++){
+          * if(url.contains(procedures[j])){ Reporter.log(url);
+          * 
+          * } }
+          */
+
       }
-      
-      /*for (int i = 0; i < links.size(); i++) {
-         String url = links.get(i).getAttribute("href");
-         //URL urls;
-         if(url.startsWith("https://denqa01.castlighthealth.com/search?q=")){
-            Reporter.log(url);
-         }
-         try {
-            urls = new URL(url);
-            HttpURLConnection http = (HttpURLConnection)urls.openConnection();
-            Reporter.log("url :: " + url + " :: Response Code :: " +  http.getResponseCode());
-         } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-         }catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-         }
-      }*/
+
+      /*
+       * for (int i = 0; i < links.size(); i++) { String url =
+       * links.get(i).getAttribute("href"); //URL urls;
+       * if(url.startsWith("https://denqa01.castlighthealth.com/search?q=")){
+       * Reporter.log(url); } try { urls = new URL(url); HttpURLConnection http
+       * = (HttpURLConnection)urls.openConnection(); Reporter.log("url :: " +
+       * url + " :: Response Code :: " + http.getResponseCode()); } catch
+       * (MalformedURLException e) { // TODO Auto-generated catch block
+       * e.printStackTrace(); }catch (IOException e) { // TODO Auto-generated
+       * catch block e.printStackTrace(); } }
+       */
    }
 }
