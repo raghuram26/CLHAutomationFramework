@@ -22,7 +22,7 @@ public class SearchRelatedPage extends BasePage{
    private By YOUR_PLAN_LINK = By.xpath(".//a[contains(@class,'where_am_i_policies_link')]");
    
    public void isProvider(){
-      Reporter.log("Search results count " + driver.findListOfElement(SEARCH_RESULTS).size());
+      Reporter.log("Search results count " + driver.findListOfElements(SEARCH_RESULTS).size());
    }
    
    public void verifyEducationLinkPresent(){
@@ -34,8 +34,8 @@ public class SearchRelatedPage extends BasePage{
    }
 
    public void getProviderLinks(){
-      List<WebElement> pr = driver.findListOfElement(PROVIDER_LINKS);
-      int listofLinks = driver.findListOfElement(PROVIDER_LINKS).size();
+      List<WebElement> pr = driver.findListOfElements(PROVIDER_LINKS);
+      int listofLinks = driver.findListOfElements(PROVIDER_LINKS).size();
       for(int i=1;i<listofLinks;i++){
          Reporter.log("Provider links ["+ i +"] :: "+ pr.get(i));
       }

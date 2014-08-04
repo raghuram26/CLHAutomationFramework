@@ -15,9 +15,7 @@ public class BasePage extends WebdriverTestCases {
    private By BOOKMARKS = By.linkText("Bookmarks");
    private By FULL_NAME = By.id("full_name");
    private By INBOX = By.linkText("Inbox");
-   private By YOUR_ACCOUNT = By.xpath(".//*[@id='user_menu']/div[2]/ul/li[2]");
-   // By.linkText("Your Account");
-   //private By LOG_OUT = By.linkText("Log Out");
+   private By YOUR_ACCOUNT = By.xpath(".//a[text()='Your Account']");
    private By LOG_OUT = By.xpath(".//*[@id='logout_link']");
    private By VERSION_INFO = By.id("version_info");
    private By FOOTER_COPYRIGHT = By.id("footer_copyright");
@@ -122,6 +120,7 @@ public class BasePage extends WebdriverTestCases {
 
    public void clickOnAccount() {
       clickOnName();
+      driver.isElementClickable(YOUR_ACCOUNT);
       driver.click(YOUR_ACCOUNT);
       Reporter.log("Clicked on YourAccount");
    }

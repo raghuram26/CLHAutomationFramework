@@ -54,20 +54,45 @@ public class FindCarePage extends BasePage {
       }
    }
 
+   public void findLinksUnderCommonCareType(){
+      WebElement l = driver.findElement(By.xpath(".//div[contains(@class,'span12')]"));
+      List<WebElement> ls = l.findElements(By.tagName("a"));
+      Reporter.log("Size :: " + ls.size());
+      URL url;
+      for(int i=0;i< ls.size(); i++){
+         String links = ls.get(i).getAttribute("href");
+         try {
+            url = new URL(links);
+            HttpURLConnection http = (HttpURLConnection)url.openConnection();
+            if(http.getResponseCode() > 300){
+               Reporter.log("URL :: " + http.toString() + ":: Problem :: " + http.getResponseCode());
+            }else{
+               Reporter.log("URL is fine");
+            }
+         } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+         }catch (IOException e) {
+            e.printStackTrace();
+         }
+        Reporter.log(ls.get(i).getAttribute("href"));
+      }
+   }
+   
    public void findAllLinks() {
-      List<WebElement> links = driver.findListOfElement(By.tagName("a"));
-      Reporter.log("Links");
+      List<WebElement> links = driver.findListOfElements(By.xpath(".//div[contains(@class,'span12')]"));
+      Reporter.log("Links--> " + links.size());
       // String [] procedures = new String [] {
       // "Primary+care+for+adults","Primary+care+for+children","Pediatric+surgeon+visit"};
       // System.out.println("Size :: " + links.size());
       for (int i = 0; i < links.size(); i++) {
-         String url = links.get(i).getAttribute("href");
-         Reporter.log(url);
+         WebElement url = links.get(i).findElement(By.tagName("a"));
+         Reporter.log(url.getAttribute("href"));
          /*
           * for(int j=0;j<procedures.length;j++){
           * if(url.contains(procedures[j])){ Reporter.log(url);
           * 
-          * } }
+          * } 
           */
 
       }

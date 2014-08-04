@@ -89,6 +89,10 @@ public class TestRemoteWebdriver extends RemoteWebDriver {
       }
    }
 	
+	public String getAttributeValue(By by, String attribute){
+	   return webdriverThreadLocal.get().findElement(by).getAttribute(attribute);
+	}
+	
 	public String getText(By by){
 	   return webdriverThreadLocal.get().findElement(by).getText();
 	}
@@ -197,14 +201,20 @@ public class TestRemoteWebdriver extends RemoteWebDriver {
 		return webdriverThreadLocal.get().findElement(by);
 	}
 	
-	public List<WebElement> findListOfElement(By by){
+	public List<WebElement> findListOfElements(By by){
 	   return webdriverThreadLocal.get().findElements(by);
 	}
 	
 	public void selectFromDropDown(By by,String value){
 		WebElement select = findElement(by);
-		org.openqa.selenium.support.ui.Select  dropDown = new org.openqa.selenium.support.ui.Select(select);      
+		org.openqa.selenium.support.ui.Select  dropDown = new org.openqa.selenium.support.ui.Select(select);    
 		dropDown.selectByValue(value);
+	}
+	
+	public WebElement getSelectValueFromDropDown(By by){
+	   WebElement select = findElement(by);
+      org.openqa.selenium.support.ui.Select  dropDown = new org.openqa.selenium.support.ui.Select(select);
+      return dropDown.getFirstSelectedOption();
 	}
 	
 	public void switchToFrame(){

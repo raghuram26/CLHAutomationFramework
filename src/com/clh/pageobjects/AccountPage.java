@@ -1,11 +1,12 @@
 package com.clh.pageobjects;
 
+import org.omg.PortableInterceptor.USER_EXCEPTION;
 import org.openqa.selenium.By;
 import org.testng.Reporter;
 
 public class AccountPage extends BasePage{
    
-   private By ACCOUNT_TITLE = By.xpath(".//*[@id='content_container']/div");
+   private By ACCOUNT_TITLE = By.xpath(".//*[@id='content_container']/div/h1");
    private By PERSONAL_INFO_EDIT = By.xpath("(.//a[text()='Edit'])[1]");
    private By PERSONAL_INFO_CANCEL = By.xpath("(.//a[text()='Cancel'])[2]");
    private By FIRST_NAME_LABEL = By.xpath(".//label[contains(@for,'user_first_name')]");
@@ -27,7 +28,7 @@ public class AccountPage extends BasePage{
    private By CANCEL_PASSWORD = By.xpath(".//*[@id='edit_password']/a[2]");
    private By CURRENT_PASSWORD = By.id("auth_password_2");
    private By NEW_PASSWORD = By.id("user_password");
-   private By SECURITY_PASSWORD_LABEL = By.xpath(".//label[contains(@for,'password')]");
+   private By SECURITY_PASSWORD_LABEL = By.xpath("(.//label[contains(@for,'password')])[3]");
    private By CONFIRM_NEW_PASSWORD = By.id("user_password_confirmation");
    private By PASSWORD_SAVE = By.xpath(".//*[@id='change_password_form']/div[4]/div[4]/div");
    
@@ -112,6 +113,33 @@ public class AccountPage extends BasePage{
       }
    }
    
+   public void verifySecurityPasswordLabel(){
+      if(driver.isElementPresent(SECURITY_PASSWORD_LABEL)){
+         Reporter.log("Password Label exists");
+         assertEquals(driver.getText(SECURITY_PASSWORD_LABEL), "Password");
+      }else{
+         Reporter.log("Password Label doesn't exist ");
+      }
+   }
+   
+   public void verifyEmailSubscriptionHeader(){
+      if(driver.isElementPresent(EMAIL_SUBSCRIPTION_HEADER_LABEL)){
+         Reporter.log("Email Subscription Header is present");
+         assertEquals(driver.getText(EMAIL_SUBSCRIPTION_HEADER_LABEL), "Email Subscriptions Edit");
+      }else{
+         Reporter.log("Email Subscription Header is not present");
+      }
+   }
+   
+   public void verifyEmailSubscriptionDescription(){
+      if(driver.isElementPresent(EMAIL_SUBSCRIPTION_DESCRIPTION)){
+         Reporter.log("Email Subscription desc is present");
+         assertEquals(driver.getText(EMAIL_SUBSCRIPTION_DESCRIPTION), "You currently receive the selected email notifications:");
+      }else{
+         Reporter.log("Email Subscription desc is not present");
+      }
+   }
+   
    public void verifyVentanaEmailCheckBox(){
       if(driver.isElementPresent(VENTANA_EMAILS_CHECKBOX)){
          Reporter.log("CheckBox Present : New Messages in Your Inbox present");
@@ -139,6 +167,27 @@ public class AccountPage extends BasePage{
          Reporter.log("CheckBox Present : User Survey Invitations");
       }else{
          Reporter.log("CheckBox Not present : User Survey Invitations");
+      }
+   }
+   
+   public void clickOnEditPersonalInformation(){
+      driver.click(PERSONAL_INFO_EDIT);
+      Reporter.log("Clicked on Edit :: Personal Information");
+   }
+   
+   public void verifyEmailId(String emailId){
+      driver.isElementVisible(USER_NEW_EMAIL);
+      assertEquals(driver.getAttributeValue(USER_NEW_EMAIL, "value"), emailId);
+   }
+   
+   public void verifyDOBPattern(){
+      String DOB = null;
+      String dob_regex="[a-zA-Z][a-zA-Z][a-zA-Z]\\s[0-9]?[0-9][0-9][0-9][0-9][0-9]";
+      DOB = driver.getSelectValueFromDropDown(USER_DOB_MONTH).getText() +" " + driver.getSelectValueFromDropDown(USER_DOB_DAY).getText() + driver.getSelectValueFromDropDown(USER_DOB_YEAR).getText();
+      if(DOB.matches(dob_regex)){
+         Reporter.log("Date of birth matches the pattern");
+      }else{
+         Reporter.log("Date of birth dosen't match the pattern");
       }
    }
 }
